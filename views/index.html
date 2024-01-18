@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Price Checker</title>
+    <meta name="description" content="A cool thing made with avatarfreak" />
+    <link id="favicon" rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./public/style.css" />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-2">
+      <header>
+        <h1 class="text-center font-weight-bold bg-primary text-white">
+          ISQA_5 - Nasdaq Stock Price Checker
+        </h1>
+      </header>
+      <div id="testui" class=" btn-outline-dark p-4 rounded">
+        <h2 class="text-orange font-weight-bold">Front-End:</h2>
+        <div class="row">
+          <div class="col card p-1 border-black">
+            <div class="card z-depth-0">
+              <h5 class="card-header info-color white-text text-center py-4">
+                <Strong>Get single price and total likes</Strong>
+              </h5>
+              <!--card content-->
+              <div class="card-body  px-lg-5 pt-0">
+                <!-- Form -->
+                <form
+                  id="testForm2"
+                  class="text-center"
+                  style="color: #757575;"
+                >
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      name="stock"
+                      placeholder="goog"
+                      class="form-control"
+                      required=""
+                    />
+                  </div>
+                  <div class="d-flex">
+                    <div>
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          name="like"
+                          value="true"
+                          class="form-check-input"
+                        />
+                        <label class="form-check-label">Do you like?</label>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-info btn-rounded btn-block my-4"
+                    type="submit"
+                  >
+                    Get Price!
+                  </button>
+                </form>
+              </div>
+              <!-- end of card content -->
+            </div>
+            <!-- end of card -->
+          </div>
+          <div class="col card p-1 border-black">
+            <div class="card  z-depth-0">
+              <h5 class="card-header info-color text-white text-center py-4">
+                <Strong>Compare and get relative likes</Strong>
+              </h5>
+              <!--card content-->
+              <div class="card-body  px-lg-5 pt-0">
+                <!-- Form -->
+                <form id="testForm" class="text-center" style="color: #757575;">
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      name="stock"
+                      placeholder="goog"
+                      class="form-control"
+                      required=""
+                    />
+                  </div>
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      name="stock"
+                      placeholder="msft"
+                      class="form-control"
+                      required=""
+                    />
+                  </div>
+                  <div class="d-flex">
+                    <div>
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          name="like"
+                          value="true"
+                          class="form-check-input"
+                        />
+                        <label class="form-check-label">Do you like?</label>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-info btn-rounded btn-block my-4"
+                    type="submit"
+                  >
+                    Get Price!
+                  </button>
+                </form>
+              </div>
+              <!-- end of card content -->
+            </div>
+            <!-- end of card -->
+          </div>
+        </div>
+        <div class="indigo mt-2 py-4 rounded z-depth-2">
+          <pre id="jsonResult" class="text-light ml-2">
+   <p class="text-center">Please fill in the form to see information!</p></pre>
+        </div>
+        <!-- end of code div -->
+      </div>
+      <div class="row mt-2 p-2">
+        <div
+          class="col card border-black gray-dark p-2"
+          style="background:#F5F5F5;"
+        >
+          <h5 class="font-weight-bold">Example usage:</h5>
+          <code>/api/stock-prices?stock=goog</code><br />
+          <code>/api/stock-prices?stock=goog&amp;like=true</code><br />
+          <code>/api/stock-prices?stock=goog&amp;stock=msft</code><br />
+          <code>/api/stock-prices?stock=goog&amp;stock=msft&amp;like=true</code>
+        </div>
+        <div class="col card border-black p-2" style="background:#F5F5F5;">
+          <h5 class="font-weight-bold">Example return:</h5>
+          <pre style="color: #e83e8c;"><code>{
+    stockData: [
+      {
+        stock: "MSFT", 
+        price: "62.30",
+        rel_likes: -1
+      },
+      {
+        stock: "GOOG",
+        price: "786.90",
+        rel_likes: 1
+      }
+    ]
+  }</code></pre>
+        </div>
+      </div>
+      <!-- end of row -->
+      <div id="userstories" class="pt-2">
+        <h3 class="font-weight-bold">User Stories</h3>
+        <ol class="list-group text-secondary">
+          <li class="list-group-item active">
+            Set the content security policies to only allow loading of scripts
+            and css from your server.
+          </li>
+          <li class="list-group-item">
+            I can <b>GET</b> <code>/api/stock-prices</code> with form data
+            containing a Nasdaq <i>stock</i> ticker and recieve back an object
+            <i>stockData</i>.
+          </li>
+          <li class="list-group-item">
+            In <i>stockData</i>, I can see the <i>stock</i>(string, the ticker),
+            <i>price</i>(decimal in string format), and <i>likes</i>(int).
+          </li>
+          <li class="list-group-item">
+            I can also pass along field <i>like</i> as <b>true</b>(boolean) to
+            have my like added to the stock(s). Only 1 like per ip should be
+            accepted.
+          </li>
+          <li class="list-group-item">
+            If I pass along 2 stocks, the return object will be an array with
+            both stock's info but instead of <i>likes</i>, it will display
+            <i>rel_likes</i>(the difference between the likes on both) on both.
+          </li>
+          <li class="list-group-item">
+            A good way to receive current price is the following external
+            API(replacing 'GOOG' with your stock):
+            <code>https://finance.google.com/finance/info?q=NASDAQ%3aGOOG</code>
+          </li>
+          <li class="list-group-item">
+            All 5 functional tests are complete and passing.
+          </li>
+        </ol>
+      </div>
+
+      <footer>
+        <p class="text-center">
+          <small>
+            N2D House © 2019. All rights reserved, designed and developed by
+            Dave
+          </small>
+        </p>
+      </footer>
+    </div>
+    <!--end of container-->
+
+    <script
+      src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../public/from.js"></script>
+  </body>
+</html>
