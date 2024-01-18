@@ -13,15 +13,12 @@ var runner = require("./test-runner");
 
 var app = express();
 app.use(
-  helmet({
-    csp: {
-      directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "cdnjs.cloudflare.com"],
-        scriptSrc: ["'self'", "code.jquery.com"],
-      },
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "cdnjs.cloudflare.com"],
+      scriptSrc: ["'self'", "code.jquery.com"],
     },
-    hidePoweredBy: { setTo: "PHP 4.2.0" },
   })
 );
 app.use("/public", express.static(process.cwd() + "/public"));
