@@ -11,7 +11,6 @@ const getStockPrice = async (stockName) => {
     const response = await axios.get(url);
     //get data from api
     const stockData = await response.data;
-    console.log(stockData);
     return parseFloat(stockData["latestPrice"]);
     //filter out today's recent time data
     const todaysStock = stockData["Time Series (5min)"];

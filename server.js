@@ -18,6 +18,7 @@ app.use(
       directives: {
         defaultSrc: ["'self'"],
         styleSrc: ["'self'", "cdnjs.cloudflare.com"],
+        scriptSrc: ["'self'"],
       },
     },
     hidePoweredBy: { setTo: "PHP 4.2.0" },
